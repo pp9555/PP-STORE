@@ -53,7 +53,7 @@ export const createProduct =async (req,res) => {
             description,
             price,
             category,
-            Image:cloudinaryResponse?.secure_url ? cloudinaryResponse.secure_url : "",
+            image:cloudinaryResponse?.secure_url ? cloudinaryResponse.secure_url : "",
         });
 
         res.status(201).json(product);
@@ -70,8 +70,8 @@ export const deleteProduct = async (req,res) =>{
         if(!product){
             return res.status(404).json({message:"Product not found"})
         }
-        if(product.Image){
-            const publicId = product.Image.split("/").pop().split(".")[0]
+        if(product.image){
+            const publicId = product.image.split("/").pop().split(".")[0]
             try {
                 await cloudinary.uploader.destroy(`products/${publicId}`)
                 console.log("Image deleted from cloudinary")
@@ -88,7 +88,7 @@ export const deleteProduct = async (req,res) =>{
     }
 }
 
-export const getRecomendedProducts = async (req,res) => {
+export const getRecommendedProducts = async (req,res) => {
     try {
         const products = await Product.aggregate([
             {
@@ -113,10 +113,10 @@ export const getRecomendedProducts = async (req,res) => {
 }
 
 export const getProductsByCategory = async (req,res) => {
-    const {category} = req.params.category;
+    const {category} = req.params;
     try {
         const products = await Product.find({category})
-        res.json(products)
+        res.json({products})
     } catch (error) {
         console.log("Error in getProductsByCategory controller",error.message);
         res.status(500).json({message:"Internal server error", error:error.message})
@@ -125,7 +125,7 @@ export const getProductsByCategory = async (req,res) => {
 
 export const toggleFeaturedProduct = async (req,res) => {
     try {
-        const product = await product.findById(req.params.id);
+        const product = await Product.findById(req.params.id);
         if(product){
             product.isFeatured = !product.isFeatured;
             const updateProduct = await product.save();

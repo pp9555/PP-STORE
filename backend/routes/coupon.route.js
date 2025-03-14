@@ -5,7 +5,7 @@ import { protectRoute } from "../middleware/auth.middleware.js";
 const router = express.Router();
 
 router.get("/",protectRoute ,getCoupon);
-router.get("/",protectRoute ,validateCoupon);
+router.post("/",protectRoute ,validateCoupon);
 
 
 export default router;

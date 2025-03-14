@@ -8,7 +8,7 @@ dotenv.config();
 const router = express.Router();
 
 
-router.get("/create-checkout-session", protectRoute, createCheckoutSession);
+router.post("/create-checkout-session", protectRoute, createCheckoutSession);
 router.get("/checkout-success", protectRoute, checkoutSuccess)
 
 
