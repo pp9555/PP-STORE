@@ -32,6 +32,8 @@ function App() {
     return <LoadingSpinner />;
   }
 
+
+
   return (
     <div className="min-h-screen bg-gray-900 text-white relative overflow-hidden">
       {/* Background graident */}
@@ -70,6 +72,7 @@ function App() {
 						element={user ? <PurchaseSuccessPage /> : <Navigate to='/login' />}
 					/>
           <Route path='/purchase-cancel' element={user ? <PurchaseCancelPage /> : <Navigate to='/login' />} />
+          
         </Routes>
       </div>
 
