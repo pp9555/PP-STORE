@@ -8,6 +8,7 @@ import couponRoutes from "./routes/coupon.route.js"
 import paymentRoutes from "./routes/payment.route.js"
 import analyticsRoutes from "./routes/analytics.route.js"
 import { connectDB } from "./lib/db.js";
+import path from "path";
 dotenv.config();
 
 const app = express();
